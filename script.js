@@ -1,40 +1,56 @@
-const title = document.getElementById("title");
-const description = document.getElementById("description");
-const instructions = document.getElementById("instructions");
-const ingredients = document.getElementById("ingredients");
-const imageUrl = document.getElementById("image-url");
-const button = document.getElementById("button");
+const divWrapper = document.getElementById("card-wrapper");
+const buttonform = document.getElementById("button-form");
 
-button.addEventListener("click", () => {
-  if (
-    title.value == "" ||
-    description.value == "" ||
-    instructions.value == "" ||
-    ingredients.value == "" ||
-    imageUrl.value == ""
-  ) {
-    return console.log("Your input is incomplete");
-  } else {
-    data = {
-      title: title.value,
-      description: description.value,
-      instructions: instructions.value,
-      ingredients: ingredients.value,
-      imageUrl: imageUrl.value,
-    };
-    fetch("https://66f0921df2a8bce81be63552.mockapi.io/Recipe", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    console.log(data);
-    (title.value = ""),
-      (description.value = ""),
-      (instructions.value = ""),
-      (ingredients.value = ""),
-      (imageUrl.value = "");
-  }
+const gettingCards = async () => {
+  const response = await fetch(
+    "https://66f0921df2a8bce81be63552.mockapi.io/item"
+  );
+  const data = await response.json();
+  return data;
+};
+
+const createCards = (generatedCards) => {
+  generatedCards.sort((a, b) => a.price - b.price);
+  generatedCards.forEach((item) => {
+    const itemCard = document.createElement("div");
+    itemCard.setAttribute("class", "created-cards");
+    const textCard = document.createElement("div");
+    textCard.setAttribute("class", "text-cards");
+    const imageTextCard = document.createElement("div");
+    imageTextCard.setAttribute("class", "image-text-card");
+
+    const moreBtn = document.createElement("a");
+    moreBtn.innerText = "More info >>";
+    moreBtn.href = `./item/index.html?id=${item.id}`;
+    moreBtn.setAttribute("class", "more-btn");
+
+    const title = document.createElement("h2");
+    const description = document.createElement("p");
+    const price = document.createElement("p");
+    const itemLocation = document.createElement("p");
+    const image = document.createElement("img");
+    image.setAttribute("class", "img-class");
+
+    title.textContent = item.title;
+    description.textContent = item.description;
+    price.textContent = "Price: " + item.price + " €";
+    itemLocation.textContent = "Location: " + item.itemLocation;
+    image.src = item.imageUrl;
+
+    textCard.append(title, description, price, itemLocation);
+    imageTextCard.append(image, textCard);
+    itemCard.append(imageTextCard, moreBtn);
+    divWrapper.append(itemCard);
+  });
+};
+
+const startApp = async () => {
+  const generatedCards = await gettingCards();
+  console.log(generatedCards);
+  createCards(generatedCards);
+};
+startApp();
+
+buttonform.addEventListener("click", () => {
+  window.location.replace("./input-form/index.html");
 });
