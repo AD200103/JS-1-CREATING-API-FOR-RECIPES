@@ -1,13 +1,6 @@
+import { gettingCards } from "./utils/fetch.js";
 const itemCardWrapper = document.getElementById("item-card-wrapper");
 const buttonForm = document.getElementById("add-item-btn");
-
-const gettingCards = async () => {
-  const response = await fetch(
-    "https://66f0921df2a8bce81be63552.mockapi.io/item"
-  );
-  const data = await response.json();
-  return data;
-};
 
 const createCards = (generatedCards) => {
   generatedCards.sort((a, b) => a.price - b.price);

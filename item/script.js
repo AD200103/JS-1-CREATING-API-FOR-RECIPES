@@ -1,3 +1,4 @@
+import { getItems } from "../utils/fetch.js";
 const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 const buttonDelete = document.getElementById("delete-button");
@@ -5,14 +6,6 @@ const buttonHome = document.getElementById("button-home");
 const itemContentWrapper = document.getElementById("item-content-wrapper");
 const warningMessage = document.getElementById("warning-message");
 buttonDelete.setAttribute("class", "button-delete");
-
-const getItems = async () => {
-  const response = await fetch(
-    `https://66f0921df2a8bce81be63552.mockapi.io/item/${id}`
-  );
-  const data = await response.json();
-  return data;
-};
 
 const createItem = async (itemInfo) => {
   const condition = document.createElement("h2");
