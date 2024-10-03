@@ -1,5 +1,5 @@
-const divWrapper = document.getElementById("card-wrapper");
-const buttonform = document.getElementById("button-form");
+const itemCardWrapper = document.getElementById("item-card-wrapper");
+const buttonForm = document.getElementById("add-item-btn");
 
 const gettingCards = async () => {
   const response = await fetch(
@@ -12,45 +12,43 @@ const gettingCards = async () => {
 const createCards = (generatedCards) => {
   generatedCards.sort((a, b) => a.price - b.price);
   generatedCards.forEach((item) => {
-    const itemCard = document.createElement("div");
-    itemCard.setAttribute("class", "created-cards");
-    const textCard = document.createElement("div");
-    textCard.setAttribute("class", "text-cards");
-    const imageTextCard = document.createElement("div");
-    imageTextCard.setAttribute("class", "image-text-card");
-
-    const moreBtn = document.createElement("a");
-    moreBtn.innerText = "More info >>";
-    moreBtn.href = `./item/index.html?id=${item.id}`;
-    moreBtn.setAttribute("class", "more-btn");
-
     const title = document.createElement("h2");
     const description = document.createElement("p");
-    const price = document.createElement("p");
+    const price = document.createElement("h2");
+    const moreBtn = document.createElement("a");
     const itemLocation = document.createElement("p");
     const image = document.createElement("img");
-    image.setAttribute("class", "img-class");
+    const textCard = document.createElement("div");
+    const imageTextCard = document.createElement("div");
+    const itemCard = document.createElement("div");
 
     title.textContent = item.title;
     description.textContent = item.description;
     price.textContent = "Price: " + item.price + " €";
     itemLocation.textContent = "Location: " + item.itemLocation;
     image.src = item.imageUrl;
+    moreBtn.textContent = "More info >>";
+    moreBtn.href = `./item/index.html?id=${item.id}`;
+
+    imageTextCard.setAttribute("class", "image-text-card");
+    itemCard.setAttribute("class", "item-card");
+    textCard.setAttribute("class", "text-cards");
+    moreBtn.setAttribute("class", "more-btn");
+    image.setAttribute("class", "item-img");
 
     textCard.append(title, description, price, itemLocation);
     imageTextCard.append(image, textCard);
     itemCard.append(imageTextCard, moreBtn);
-    divWrapper.append(itemCard);
+    itemCardWrapper.append(itemCard);
   });
 };
 
 const startApp = async () => {
   const generatedCards = await gettingCards();
-  console.log(generatedCards);
   createCards(generatedCards);
 };
 startApp();
 
-buttonform.addEventListener("click", () => {
+buttonForm.addEventListener("click", () => {
   window.location.replace("./input-form/index.html");
 });

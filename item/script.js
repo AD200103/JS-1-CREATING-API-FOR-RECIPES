@@ -2,7 +2,9 @@ const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 const buttonDelete = document.getElementById("delete-button");
 const buttonHome = document.getElementById("button-home");
-const contentWrapper = document.getElementById("content-wrapper");
+const itemContentWrapper = document.getElementById("item-content-wrapper");
+const warningMessage = document.getElementById("warning-message");
+buttonDelete.setAttribute("class", "button-delete");
 
 const getItems = async () => {
   const response = await fetch(
@@ -20,10 +22,11 @@ const createItem = async (itemInfo) => {
   const title = document.createElement("h1");
   const price = document.createElement("p");
   const image = document.createElement("img");
-  image.setAttribute("class", "img-class");
   const infoCard = document.createElement("div");
-  infoCard.setAttribute("class", "info-card");
   const infoCardAndImage = document.createElement("div");
+
+  image.setAttribute("class", "item-img");
+  infoCard.setAttribute("class", "info-card");
   infoCardAndImage.setAttribute("class", "info-card-and-image");
   additionalInfo.setAttribute("class", "additional-info");
 
@@ -44,7 +47,7 @@ const createItem = async (itemInfo) => {
     additionalInfo
   );
   infoCardAndImage.append(image, infoCard);
-  contentWrapper.append(title, infoCardAndImage);
+  itemContentWrapper.append(title, infoCardAndImage);
 };
 
 const deleteItems = async () => {
@@ -58,19 +61,18 @@ const deleteItems = async () => {
 const initPage = async () => {
   const itemInfo = await getItems();
   createItem(itemInfo);
-  console.log(itemInfo);
 };
 
 initPage();
 
-buttonDelete.setAttribute("class", "button-delete");
-
 buttonDelete.addEventListener("click", async () => {
   const response = await deleteItems();
   if (response.status == 200) {
-    console.log("Deleted succesfully!");
+    warningMessage.style.color = "DarkOliveGreen";
+    warningMessage.innerText = "Item was deleted succesfuly!";
   }
 });
+
 buttonHome.addEventListener("click", () => {
   window.location.replace("../index.html");
 });

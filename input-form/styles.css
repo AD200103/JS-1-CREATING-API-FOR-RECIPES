@@ -10,6 +10,27 @@
   min-height: 100vh;
   padding-bottom: 20px;
 }
+header {
+  width: 100%;
+  height: 100px;
+  background-color: bisque;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 30px 0px 30px;
+}
+header h1 {
+  font-size: 2rem;
+  color: rgb(123, 29, 29);
+  opacity: 0.7;
+}
+.webpage-logo {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  object-fit: cover;
+  object-position: center;
+}
 .form {
   text-align: center;
   display: flex;
@@ -19,18 +40,13 @@
   margin-top: 50px;
   padding: 0px 50px 0px 50px;
 }
-header h1 {
-  font-size: 2rem;
-  color: rgb(123, 29, 29);
-  opacity: 0.7;
-}
 .form h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   padding: 10px;
   color: rgb(132, 34, 34);
 }
 .form > input,
-#button,
+#button-add-item,
 #button-home {
   all: unset;
   height: 30px;
@@ -39,54 +55,28 @@ header h1 {
   border-radius: 30px 30px 30px 30px;
   background-color: bisque;
   opacity: 0.5;
-  color: black;
   border-color: bisque;
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 5px 15px 5px 15px;
   text-align: left;
 }
-.form > input:focus {
-  opacity: 1;
-}
-#button:hover,
+.form > input:focus,
+#button-add-item:hover,
 #button-home:hover {
   opacity: 1;
 }
-
-#button,
+#button-add-item,
 #button-home {
   background-color: burlywood;
   cursor: pointer;
   text-align: center;
-  width: fit-content;
-  margin: auto;
 }
-
-#button {
+#button-add-item {
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 #button-home {
   border-radius: 0px;
-  margin: 0%;
-}
-header {
-  width: 100%;
-  height: 100px;
-  background-color: bisque;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 30px;
-}
-.oppacity-for-button {
-  opacity: 1;
-}
-.webpage-logo {
-  width: 100px;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  margin: 0;
 }
 fieldset {
   all: unset;
@@ -102,4 +92,20 @@ fieldset legend span {
   color: rgb(132, 34, 34);
   font-weight: bold;
   font-size: 1.5rem;
+}
+@media screen and (max-width: 381px) {
+  header {
+    height: fit-content;
+    flex-direction: column;
+    gap: 15px;
+    padding: 10px;
+  }
+  header h1 {
+    display: none;
+  }
+}
+@media screen and (max-width: 370px) {
+  .form {
+    padding: 0px 20px 0px 20px;
+  }
 }
