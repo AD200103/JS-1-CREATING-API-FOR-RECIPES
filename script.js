@@ -22,12 +22,12 @@ const createCards = (generatedCards) => {
     const imageTextCard = document.createElement("div");
     const itemCard = document.createElement("div");
 
-    title.textContent = item.title;
-    description.textContent = item.description;
-    price.textContent = "Price: " + item.price + " €";
-    itemLocation.textContent = "Location: " + item.itemLocation;
+    title.innerText = item.title;
+    description.innerText = item.description;
+    price.innerText = "Price: " + item.price + " €";
+    itemLocation.innerText = "Location: " + item.itemLocation;
     image.src = item.imageUrl;
-    moreBtn.textContent = "More info >>";
+    moreBtn.innerText = "More info >>";
     moreBtn.href = `./item/index.html?id=${item.id}`;
 
     imageTextCard.setAttribute("class", "image-text-card");

@@ -35,8 +35,8 @@ const createItem = async (itemInfo) => {
   originalPackaging.innerText =
     "Original packaging: " + itemInfo.originalPackaging;
   additionalInfo.innerText = "Additional info: " + itemInfo.additionalInfo;
-  title.textContent = itemInfo.title;
-  price.textContent = "Price: " + itemInfo.price + " €";
+  title.innerText = itemInfo.title;
+  price.innerText = "Price: " + itemInfo.price + " €";
   image.src = itemInfo.imageUrl;
 
   infoCard.append(
